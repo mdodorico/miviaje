@@ -1,0 +1,86 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> Mi Viaje | Aplicación para buscar alquileres de verano</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <style>
+        nav.navbar{
+	         background-color: #2B52DD;
+	         font-family: Arial;
+	         font-size: 1 em;
+        }
+        .btn-primary{
+             background-color: #FFA83A;
+        }
+        .btn-primary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-primary:active {
+            box-shadow: none;
+        }
+        .btn-secondary{
+             background-color: #FFA83A;
+        }
+        .btn-secondary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-secondary:active{
+	         box-shadow: none;
+        }
+        body{
+             background-image: url("../imagenes/playa.jpg");
+             background-repeat: repeat;
+        }
+        
+    </style>
+  </head>
+
+ <body>
+    <header th:insert="fragments/menu.html :: menu-principal"></header>
+    <main role="main">
+      <div class="container"> 
+        <div>
+          <div class="text-center text-capitalize" style="color: yellow; text-align:center; font-family: Make Summer Fun; font-size:50px">Propiedades en alquiler</div>
+          <br/><br/>
+          <form class="form-inline" th:action="@{/search}" method="GET" th:object="${search}">
+            <select th:field="*{categoria.id}" class="custom-select custom-select mb-3">
+              <option th:value="${null}" selected> Todas</option>
+              <option th:each="cat : ${categorias}"
+                      th:value="${cat.id}" 
+                      th:text="${cat.nombre}"></option>
+            </select>&nbsp;
+            <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+          </form>
+        </div>
+      <hr>
+        <div class="row">
+          <div class="col-md-3" th:each="alquiler : ${alquileres}">
+           <div class="card" style="width: 17rem;">            
+            <img class="rounded mx-auto d-block" th:src="@{/imagenes/{img} (img=${alquiler.imagen})}" alt="propiedad en alquiler" width="240" height="180">  
+            <hr>          
+           <div class="col-md-9">
+              <h2 th:text="${alquiler.nombre}"></h2>
+              <h6 class="card-title"><strong>Categoría: </strong> <span th:text="${alquiler.categoria.nombre}"></span></h6>
+              <h6 class="card-title"><strong>Puntaje: </strong> <span th:text="${alquiler.puntaje}"></span><span> estrellas</span></h6>
+              <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#calendars.format(alquiler.fecha,'dd/MM/yyyy')}"></span></h6>
+              <h6 class="card-title"><strong>Precio por quincena: $</strong><span></span><span th:text="${alquiler.precio}"></span></h6>               
+              <p><a class="btn btn-warning" th:href="@{/alquileres/view/{id} (id=${alquiler.id})}" role="button">Detalles</a></p> 
+              <hr><br/>           
+           </div>
+         </div><br/>  
+        </div>
+      </div>
+    </main>
+   <footer th:insert="fragments/footer.html :: pie-pagina" class="container-fluid" style="color:white; margin-top:200px;margin-left:100px"></footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+ </body>
+</html>

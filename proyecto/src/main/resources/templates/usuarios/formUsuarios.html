@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Crear/editar usuarios</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    
+    <style>
+        nav.navbar {
+	         background-color: #2B52DD;
+	         font-family: Arial;
+	         font-size: 1 em;
+        }
+        .btn-primary{
+             background-color: #FFA83A;
+        }
+        .btn-primary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-primary:active {
+            box-shadow: none;
+        }
+        .btn-secondary{
+             background-color: #FFA83A;
+        }
+        .btn-secondary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-secondary:active {
+            box-shadow: none;
+        }
+        .btn-info{
+             background-color: #7E7878;
+        }
+        .btn-info:hover{
+	         background-color: #3C3C3C;
+        }
+        .btn-info:active {
+            box-shadow: none;
+        }
+    </style>
+  </head>
+
+  <body>
+    <header th:insert="fragments/menu.html :: menu-principal"></header>
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <div class="card">
+          <h4 class="card-header"><strong>Datos del usuario</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/usuarios/save}" method="POST" th:object="${usuario}" enctype="multipart/form-data">   
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            Por favor, corrija los siguientes errores
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+            </div>  
+            <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <input type="hidden" th:field="*{id}"></input>
+                    <input type="hidden" th:field="*{imagen}"></input>
+                    <input type="hidden" th:field="*{estatus}"></input>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email" name="email" required="required">
+                  </div> 
+                  <div class="form-group">
+                   <label for="perfil">Rol</label>
+                     <select class="form-control" th:field="*{perfil}">
+                       <option th:each="perfil : ${perfiles}" 
+                               th:value="${perfil.id}" 
+                               th:text="${perfil.perfil}"></option>
+                     </select>
+                  </div> 
+                </div>    
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" th:field="*{username}" id="username" name="username" required="required">
+                  </div>
+                </div>
+                 <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" th:field="*{password}" id="password" name="password" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <img class="rounded mx-auto d-block" th:src="@{/imagenes/{img} (img=${usuario.imagen})}" alt="Usuario sin imagen" width="200" height="200"><br/>
+                    <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen">
+                 </div>
+                </div> 
+              </div>                 
+              <hr>
+                 <p>Por favor, vuelva a ingresar la contraseña para guardar los cambios o ingrese una nueva si desea cambiarla.</p>
+                 <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                 <a class="btn btn-info" th:href="@{/}" role="button"><i class="fas fa-chevron-circle-left" aria-hidden="true"></i> Volver</a>  
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer th:insert="fragments/footer.html :: pie-pagina" class="container-fluid" style="margin-top:200px;margin-left:100px"></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{tinymce/tinymce.min.js}"></script>
+  </body>
+</html>

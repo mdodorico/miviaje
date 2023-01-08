@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> MiViaje | Detalles de los alquileres</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    
+    <style>
+        nav.navbar {
+	         background-color: #2B52DD;
+	         font-family: Arial;
+	         font-size: 1 em;
+        }
+        .btn-primary{
+             background-color: #FFA83A;
+        }
+        .btn-primary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-primary:active {
+            box-shadow: none;
+        }
+        .btn-secondary{
+             background-color: #FFA83A;
+        }
+        .btn-secondary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-secondary:active {
+            box-shadow: none;
+        }
+        body{
+             background-image: url("../imagenes/playa.jpg");
+             background-repeat: repeat;
+        }
+    </style>
+</head>
+
+<body>
+   <header th:insert="fragments/menu.html :: menu-principal"></header>
+      <div style="margin-top:100px;">
+           <h1 class="text-center"><p>Su consulta fue enviada al dueño de la propiedad</p></h1>
+           <h4 class="text-center"><p>En breve se pondrá en contacto para contestar sus preguntas. ¡Muchas gracias!</p></h4>
+           <h4 class="text-center"><p>Click <a th:href="@{/}">acá</a> para volver a la página principal.</p></h4>
+      </div>
+    <footer th:insert="fragments/footer.html :: pie-pagina" class="container-fluid" style="margin-top:420px;margin-left:100px"></footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

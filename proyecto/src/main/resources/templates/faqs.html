@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> MiViaje | FAQs</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    <style>
+        nav.navbar {
+	         background-color: #2B52DD;
+	         font-family: Arial;
+	         font-size: 1 em;
+        }
+        .btn-primary{
+             background-color: #FFA83A;
+        }
+        .btn-primary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-primary:active {
+            box-shadow: none;
+        }
+        .btn-secondary{
+             background-color: #FFA83A;
+        }
+        .btn-secondary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-secondary:active {
+            box-shadow: none;
+        }
+        .btn-success{
+             background-color: #7E7878;
+        }
+        .btn-success:hover{
+	         background-color: #3C3C3C;
+        }
+        .btn-success:active {
+            box-shadow: none;
+        }
+        body{
+             background-image: url("../imagenes/playa.jpg");
+             background-repeat: repeat;
+        }
+    </style>
+</head>
+
+<body>
+   <header th:insert="fragments/menu.html :: menu-principal"></header>
+    <div class="container">
+    <h2 class="font-weight-bold text-center text-capitalize">Preguntas frecuentes</h2><hr><br/>
+      <div class="row">
+        <br/><br/>
+          <p style="padding-top:10px">P: ¿Puedo contratar un alquiler y actividades en un solo paquete?</p>
+          <p style="padding-top:10px">R: Sí, por supuesto. Próximamente estaremos habilitando la opción a través de nuestra web, pero puede comunicarse con nosotros por teléfono, email o nuestras redes sociales.</p>
+      </div>
+      <a class="btn btn-success" th:href="@{/}" role="button"><i class="fas fa-chevron-circle-left" aria-hidden="true"></i> Volver</a>
+    </div>
+    <footer th:insert="fragments/footer.html :: pie-pagina" class="container-fluid" style="margin-top:370px;margin-left:100px"></footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

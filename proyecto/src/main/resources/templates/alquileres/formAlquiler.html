@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Crear/editar alquileres</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    
+    <style>
+        nav.navbar {
+	         background-color: #2B52DD;
+	         font-family: Arial;
+	         font-size: 1 em;
+        }
+        .btn-primary{
+             background-color: #FFA83A;
+        }
+        .btn-primary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-primary:active {
+            box-shadow: none;
+        }
+        .btn-secondary{
+             background-color: #FFA83A;
+        }
+        .btn-secondary:hover{
+	         background-color: #B22D13;
+        }
+        .btn-secondary:active {
+            box-shadow: none;
+        }
+        .btn-info{
+             background-color: #7E7878;
+        }
+        .btn-info:hover{
+	         background-color: #3C3C3C;
+        }
+        .btn-info:active {
+            box-shadow: none;
+        }
+    </style>
+  </head>
+
+  <body>
+    <header th:insert="fragments/menu.html :: menu-principal"></header>
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <div class="card">
+          <h4 class="card-header"><strong>Datos del alquiler</strong></h4>              
+          <div class="card-body">
+            <form th:action="@{/alquileres/save}" method="POST" th:object="${alquiler}" enctype="multipart/form-data">   
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            Por favor, corrija los siguientes errores
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+            </div>                     
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="nombre">Título de la publicación</label>
+                    <input type="hidden" th:field="*{id}"></input>
+                    <input type="hidden" th:field="*{imagen}"></input>
+                    <input type="text" class="form-control" th:field="*{nombre}" id="nombre" name="nombre" required="required">
+                  </div>
+                </div>
+              </div>    
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+				     <label for="categoria">Categoría</label>
+                     <select class="form-control" th:field="*{categoria.id}">
+                       <option th:each="cat : ${categorias}" 
+                               th:value="${cat.id}" 
+                               th:text="${cat.nombre}"></option>
+                     </select>
+			      </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="fecha">Fecha de Publicación</label>
+                    <input type="text" class="form-control" th:field="*{fecha}" name="fecha" id="fecha" placeholder="dd-mm-aaaa" required="required">
+                  </div>  
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-check">
+                    <label class="form-check-label" for="destacado0"></label><br>
+                    <input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="destacado" value="1" checked="checked">
+                    <label class="form-check-label" for="destacado1">Destacado</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{destacado}" name="destacado" id="destacado" value="0">
+                    <label class="form-check-label" for="destacado2">No Destacado</label>
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-check">
+                    <label class="form-check-label" for="pet0"></label><br>
+                    <input class="form-check-input" type="radio" th:field="*{pet}" name="pet" id="pet" value="1" checked="checked">
+                    <label class="form-check-label" for="pet1">Es Pet friendly</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{pet}" name="pet" id="pet" value="0">
+                    <label class="form-check-label" for="pet2">No es Pet friendly</label>
+                  </div>
+                </div>
+              </div>    
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="precio">Precio por quincena</label>
+                    <input type="text" class="form-control" name="precio" th:field="*{precio}" id="precio" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="puntaje">Puntaje (1 al 10)</label>
+                    <input type="text" class="form-control" name="puntaje" th:field="*{puntaje}" id="puntaje" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <img class="rounded mx-auto d-block" th:src="@{/imagenes/{img} (img=${alquiler.imagen})}" alt="Propiedad sin imagen" width="200" height="200"><br/>
+                    <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen">
+                  </div>
+                </div>
+              </div> 
+              <hr>
+              <div class="row">
+                <div class="col-md-9"> 
+                  <div class="form-group">
+                    <label for="descripcion"><strong>Descripcion</strong></label>          
+                    <textarea class="form-control" th:field="*{descripcion}" name="descripcion" id="descripcion" rows="7" required="required"></textarea>
+                  </div> 
+                </div> 
+              </div> 
+              <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+              <a class="btn btn-info" th:href="@{/alquileres/indexPaginate}" role="button"><i class="fas fa-chevron-circle-left" aria-hidden="true"></i> Volver</a>  
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer th:insert="fragments/footer.html :: pie-pagina" class="container-fluid" style="margin-top:200px;margin-left:100px"></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{tinymce/tinymce.min.js}"></script>
+    
+    <script>
+      $(function () {
+          $("#fecha").datepicker({dateFormat: 'dd-mm-yyyy'});
+        }
+      );
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,17 @@
+use viajes;
+
+select * from usuarios;
+select * from perfiles;
+select * from usuarioperfil;
+select * from alquileres;
+select * from categorias;
+
+insert into perfiles (perfil) values ("Administrador");
+insert into perfiles (perfil) values ("Usuario");
+
+update usuarioperfil set idPerfil=1 where idUsuario=1;
+
+insert into categorias (nombre, descripcion) values ("Casa", "Edificación que tiene fines de vivienda familiar más popularmente y que está organizada en una o varias plantas, aunque no suelen ser jamás de más tres pisos y que dispone además de un sótano y una zona superior que puede adoptar la forma de buhardilla o terraza.");
+insert into categorias (nombre, descripcion) values ("Departamento", "Unidad de vivienda que comprende una o más habitaciones diseñadas para proporcionar instalaciones completas para un individuo o una pequeña familia.");
+insert into categorias (nombre, descripcion) values ("Loft", "Es una gran estancia en la que tanto el comedor, como la cocina y el dormitorio están unidos.");
+insert into categorias (nombre, descripcion) values ("Quinta", "Propiedad de al menos una o dos hectáreas rodeada de altos muros por sus cuatro costados, parte de los cuales son estructurales para la vivienda principal.");

@@ -1,0 +1,19 @@
+email: mariana@prueba.com
+pass: prueba
+username: Marian
+
+email: gerardo@gmail.com
+pass: prueba
+username: Gerar
+
+email: ariel@outlook.com
+pass: prueba
+username: Ari
+
+email: ramiro@prueba.com
+pass: prueba
+username: Rama
+
+----------------------------------------
+
+http://localhost:8080/
